@@ -1,11 +1,14 @@
-using System;
+namespace petforms
+{
+  
+     using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace petshopconsole
-{
+
+
     public abstract class Animal
     {
         public string Nome { get; private set; }
@@ -37,7 +40,7 @@ namespace petshopconsole
             public Cachorro(string nome, int idade) : base(nome, idade) { }
 
             public override string FazerSom() => "Au au";
-            
+
 
 
         }
@@ -48,20 +51,29 @@ namespace petshopconsole
 
             public override string FazerSom() => "miau miau";
 
-      
+
+        }
+
+        public class Passaro : Animal
+        {
+            public Passaro(string nome, int idade) : base(nome, idade) { }
+
+            public override string FazerSom() => "piu piu";
+
         }
 
 
-        
-        class program
+
+        class Program
         {
-            public void Main(string[] args)
+            public static void Main(string[] args)
             {
 
                 List<Animal> animais = new List<Animal>
         {
             new Cachorro ("pex",5),
-            new Gato ("jujuba", 5)
+            new Gato ("jujuba", 5),
+            new Passaro("tobias",10)
         };
                 foreach (Animal animal in animais)
                 {
@@ -72,10 +84,21 @@ namespace petshopconsole
 
                 }
                 Console.WriteLine("Pressione qualquer tecla para sair...");
+                try
+                {
+                    Animal animalinvalido = new Cachorro("", -5);
+                }
+                catch (ArgumentException)
+                {
+                    Console.WriteLine($"Erro ao criar animal ");
+                }
                 Console.ReadKey();
+
             }
         }
-        
+
 
     }
+
 }
+
